@@ -16,4 +16,4 @@ app.innerHTML = `
   </div>
 `;
 
-console.log(data.data);
+console.log("创建成功", data.data);
