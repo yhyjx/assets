@@ -1,0 +1,672 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" content="ie=edge" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>全部队列分诊信息（默认样式）</title>
+    <link href="showClass.css" rel="stylesheet" type="text/css" />
+    <style>
+      .doctor-item {
+        width: 100%;
+        height: 200px;
+        background: url(images/daizhentitlebg.gif) repeat-x;
+        padding: 10px 5px;
+        overflow: hidden;
+        position: relative;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 6;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        box-sizing: border-box;
+      }
+    </style>
+    <script src="jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      var QueueUpdateTime = new Date();
+      var dateTime = new Date();
+      var arr_week = new Array(
+        "星期日",
+        "星期一",
+        "星期二",
+        "星期三",
+        "星期四",
+        "星期五",
+        "星期六"
+      );
+
+      var yy = dateTime.getFullYear();
+      var MM = dateTime.getMonth() + 1; //因为1月这个方法返回为0，所以加1
+      var dd = dateTime.getDate();
+      var day = dateTime.getDay();
+      var week = arr_week[day];
+
+      var firstMark = false;
+
+      /**
+       *
+       * 新增医生展示逻辑
+       * 2023-04-11
+       *
+       * **/
+      function DoctorInfo(doctorInfos) {
+        this.doctorInfos = doctorInfos;
+        var content = "";
+        this.returnContent = function () {
+          if (this.doctorInfos.length && this.doctorInfos.length > 0) {
+            for (var i = 0; i < this.doctorInfos.length; i++) {
+              var item = this.doctorInfos[i];
+              content +=
+                "<div class='doctor-item'>" +
+                '<img style="width: 120px;height: 120px;float: left;" src=' +
+                item["imgUrl"] +
+                " />" +
+                '<p style="font-size: 30px;padding: 0;margin: 0;">' +
+                item["name"] +
+                "</p>" +
+                '<p style="font-size: 22px;padding: 0;margin: 0;">' +
+                item["content"] +
+                "</p>" +
+                "</div>";
+            }
+          } else {
+            content =
+              '<div style="background:url(images/daizhentitlebg.gif) repeat-x;TEXT-ALIGN:center;">暂无医生信息</div>';
+          }
+          return content;
+        };
+        this.showDoctorInfo = function () {
+          $("#doctorInfo").html(this.returnContent());
+          if (!firstMark) {
+            firstMark = true;
+            var _this = this;
+            setInterval(function () {
+              _this.watchScroll();
+            }, 100);
+          }
+        };
+        this.watchScroll = function () {
+          var windowHeight = $(window).height();
+          var doctorInfoHeight = $("#doctorInfo").height();
+          var scrollTop = $("#doctorInfo").scrollTop();
+          if (scrollTop + windowHeight < doctorInfoHeight) {
+            $("#doctorInfo").animate({ scrollTop: doctorInfoHeight }, 10000);
+          }
+          $("#doctorInfo").animate({ scrollTop: 0 }, 0);
+        };
+      }
+
+      var doctorInfos = [
+        {
+          name: "刘学义",
+          imgUrl: "./images/southeast.jpg",
+          content:
+            "阿萨德十多万群二无群二大所多sad撒多撒多萨达萨达提供撒多撒多萨达萨达提供撒多撒多萨达萨达提供撒多撒多萨达萨达提供撒多撒多萨达萨达提供撒多撒多萨达萨达提供撒多撒多萨达萨达提供",
+        },
+        {
+          name: "南宁",
+          imgUrl: "./images/southeast.jpg",
+          content:
+            "计划工信部V吹牛逼法规及地方好舒服地轨中心DASDASDASD撒多撒多萨达萨达提供撒多撒多萨达萨达提供撒多撒多萨达萨达提供撒多撒多萨达萨达提供撒多撒多萨达萨达提供撒多撒多萨达萨达提供撒多撒多萨达萨达提供",
+        },
+        {
+          name: "是的撒大所",
+          imgUrl: "./images/southeast.jpg",
+          content:
+            "FDG撒旦发射点v传播广泛和彩色豆腐市场上发生的丰台区而投入与体育生v出现是公司发阿飞撒多撒多萨达萨达提供撒多撒多萨达萨达提供撒多撒多萨达萨达提供撒多撒多萨达萨达提供撒多撒多萨达萨达提供撒多撒多萨达萨达提供撒多撒多萨达萨达提供",
+        },
+        {
+          name: "其味无穷二",
+          imgUrl: "./images/southeast.jpg",
+          content: "偶i价格和v不能再v在v从v和法国基础撒旦撒旦",
+        },
+        {
+          name: "他摇摇头",
+          imgUrl: "./images/southeast.jpg",
+          content: "请问犬瘟热特",
+        },
+        {
+          name: "酷酷的",
+          imgUrl: "./images/southeast.jpg",
+          content: "通过一次v地方还是JUIDFASFAASDSAFDSAFTWTE",
+        },
+        {
+          name: "前往",
+          imgUrl: "./images/southeast.jpg",
+          content: "撒发生范德萨发客户尽快纠正v不充分的吧",
+        },
+        {
+          name: "人太少",
+          imgUrl: "./images/southeast.jpg",
+          content: "我倾耳听雨声大嘴巴",
+        },
+        {
+          name: "凹陷处",
+          imgUrl: "./images/southeast.jpg",
+          content: "我去饿饿与秩序你",
+        },
+        {
+          name: "快没了",
+          imgUrl: "./images/southeast.jpg",
+          content: "我要安德森出发点和法规见过好几个",
+        },
+      ];
+
+      setTimeout("showTime()", 0);
+
+      function showTime() {
+        var hh = new Date().getHours();
+        var mm = new Date().getMinutes();
+        var ss = new Date().getSeconds();
+        $("#time").html(
+          (hh < 10 ? "0" + hh : hh) +
+            ":" +
+            (mm < 10 ? "0" + mm : mm) +
+            ":" +
+            (ss < 10 ? "0" + ss : ss)
+        );
+        $("#week").html(
+          week + "&nbsp;" + (hh <= 12 ? "上午" : "下午") + "&nbsp;"
+        );
+        setTimeout("showTime()", 1000);
+      }
+
+      //******************大屏幕显示目前有两种样式：（1）待诊病人显示在一行，滚动显示；（2）待诊病人显示两列，固定显示********************//
+      var nTotal = 0; //一共显示多少队列，0不限制显示队列数全部显示，>0按指定队列数显示。
+      var nCount = 5; //每页显示队列数，每页显示记录数。
+      var turntime = 10; //翻页时间，0为不翻页，个数单位为1秒，例：1:间隔一秒翻页，10:间隔十秒翻页。
+      var nWait = 6; //显示队列排队病人数
+      var bShowOneRows = true; //待诊患者在一行滚动显示标识：true 待诊病人显示在一行，滚动显示；false 待诊病人显示两列，固定显示。
+      var hidflag = false; //2015-12-04 WQ 是否隐藏部分名字，false不隐藏显示全名，true隐藏。
+
+      //以下内容不能手工更改
+      var pagenum = 0; //页码，从0开始计算第一页。
+      var pagecount = 0; //总页数，需要在读取数据后计算出来。
+      var b;
+      //******************大屏幕显示目前有两种样式：（1）待诊病人显示在一行，滚动显示；（2）待诊病人显示两列，固定显示********************//
+
+      var preSCID = "";
+      function LoadData() {
+        var doctorInfo = new DoctorInfo(doctorInfos);
+        doctorInfo.showDoctorInfo();
+        //$.get("IndexHandle.ashx?action=body2&count=" + nCount + "&nwait=" + nWait + "&a=" + Math.random() + "&StationID=" + StationID, function (data) {
+        $.get(
+          "IndexHandle.ashx?action=body2&count=" +
+            nTotal +
+            "&nwait=" +
+            nWait +
+            "&a=" +
+            Math.random() +
+            "&StationID=" +
+            StationID,
+          function (data) {
+            b = eval("(" + data + ")");
+
+            nTotal = b.rows.length; //记录总数
+            $("#labList").text(nTotal);
+            if (b.rows.length % nCount == 0)
+              pagecount = parseInt(b.rows.length / nCount);
+            else pagecount = parseInt(b.rows.length / nCount) + 1; //总页数：记录总数/每页显示队列。
+            $("#labTotalPage").text(pagecount);
+            $("#StationName").text(b.station[0].SNAME); //分诊台名称
+
+            CreateTablehtml();
+          }
+        );
+      }
+
+      function CreateTablehtml() {
+        $("#labCurrPage").text(pagenum + 1);
+
+        var content = "";
+        content +=
+          '<table width="100%" height="100%" style="TEXT-ALIGN: center; BACKGROUND-COLOR: #fff; BORDER-SPACING: 3px; font-size:45px; border:3px solid #4a84ff; color:#000;"  cellspacing="3" cellpadding="0">';
+        content += '<tr bgcolor="#FFFFFF" style="color:#FFF;height:64px;" >';
+        content +=
+          '<td style="background:url(images/daizhentitlebg.gif) repeat-x; height:64px; " align="center" valign="top">队列</td>';
+        content +=
+          '<td style="background:url(images/daizhentitlebg.gif) repeat-x; height:64px; " align="center" valign="top">诊室</td>';
+        content +=
+          '<td style="background:url(images/daizhentitlebg.gif) repeat-x; height:64px; " align="center" valign="top">当前号</td>';
+        content +=
+          '<td style="background:url(images/daizhentitlebg.gif) repeat-x; height:64px; width: 50%" align="center" valign="top">待诊队列</td>';
+        content += "</tr>";
+
+        var Num = 0;
+        var i = pagenum * nCount;
+        $("#labstartred").text(i);
+        for (i; i < (pagenum + 1) * nCount; i++) {
+          var _QUEUENAME = "&nbsp;",
+            _QUEUENUMBER = "&nbsp;",
+            _PATIENTNAME = "&nbsp;",
+            _ROOMNAME = "&nbsp;",
+            _ROOMPLACE = "&nbsp;",
+            _CHECKDATES = "&nbsp;";
+          var SCID = "",
+            PatientInfo = "";
+
+          if (i < nTotal) {
+            SCID = b.rows[i].SCID; //队列ID
+            _QUEUENAME = b.rows[i].QUEUENAME;
+            _QUEUENUMBER =
+              b.rows[i].QUEUENUMBER == "" ? "" : b.rows[i].QUEUENUMBER + "号";
+            _PATIENTNAME = b.rows[i].PATIENTNAME;
+            _ROOMNAME = b.rows[i].ROOMNAME;
+            _ROOMPLACE = b.rows[i].ROOMPLACE;
+            _CHECKDATES = b.rows[i].CHECKDATES;
+
+            _PATIENTNAME = HiddenName(_PATIENTNAME, hidflag); //2015-12-04 WQ 处理正在呼叫的名称
+
+            if (bShowOneRows) {
+              //001.所有排队患者显示在一行上
+              var arrPat = b.rows[i].PAT.split(","); //排队患者列表字符串
+              for (var j = 0; j < arrPat.length; j++) {
+                if (j > 0)
+                  PatientInfo +=
+                    "&nbsp;&nbsp;&nbsp;&nbsp;" + HiddenName(arrPat[j], hidflag);
+                //2015-12-04 WQ 处理移动等待队列名字.
+                else PatientInfo += HiddenName(arrPat[j], hidflag); //2015-12-04 WQ 处理移动等待队列名字.
+              }
+            } else {
+              //002.所有排对患者固定显示在页面上
+              var arrPat = b.rows[i].PAT.split(","); //排队患者列表字符串
+              PatientInfo = "<table align='center' width='80%'>";
+              for (var j = 0; j < b.rows[i].COUNT; j++) {
+                if (j % 2 == 0) {
+                  PatientInfo +=
+                    "<tr><td style='width:50%;text-align:left'>" +
+                    HiddenName(arrPat[j], hidflag) +
+                    "</td>"; //2015-12-04 WQ 处理固定等待队列名字.
+                } else {
+                  PatientInfo +=
+                    "<td style='width:50%;text-align:left'>" +
+                    HiddenName(arrPat[j], hidflag) +
+                    "</td></tr>"; //2015-12-04 WQ 处理固定等待队列名字.
+                }
+              }
+              PatientInfo += "</table>";
+            }
+
+            content += "<tr>";
+            content += '<td bgcolor="#8AC2E2">' + _QUEUENAME + "</td>";
+            content += '<td bgcolor="#bce4ff">' + _ROOMNAME + "</td>";
+            content += '<td bgcolor="#8AC2E2">' + _PATIENTNAME + "</td>";
+            content += '<td bgcolor="#bce4ff">' + _QUEUENUMBER + "</td>";
+
+            if (preSCID != SCID) {
+              if (preSCID != "" && Num > 1) {
+                var left = content.substring(
+                  0,
+                  content.lastIndexOf("rowspan='1'") - 1
+                );
+                var right = content.substring(
+                  content.lastIndexOf("rowspan='1'") + 11,
+                  content.length
+                );
+                content = left + " rowspan='" + Num + "'" + right;
+              }
+              Num = 0;
+
+              if (bShowOneRows) {
+                //003.滚动显示
+                if (PatientInfo.length > 75)
+                  content +=
+                    '<td bgcolor="#8AC2E2" style="color:red;font-size:36px;" rowspan=\'1\'><marquee direction="left"  scrollamount="6">' +
+                    PatientInfo +
+                    "</marquee></td>";
+                else
+                  content +=
+                    '<td bgcolor="#8AC2E2" style="color:red;font-size:36px;" rowspan=\'1\'>' +
+                    PatientInfo +
+                    "</td>";
+              } else {
+                //004.固定显示
+                content +=
+                  '<td bgcolor="#8AC2E2" style="color:red;font-size:45px;" rowspan=\'1\'>' +
+                  PatientInfo +
+                  "</td>";
+              }
+            }
+            content += "</tr>";
+            Num++;
+            preSCID = SCID;
+          } else {
+            //检索队列小于显示数，已无队列显示时。
+            if (i >= nTotal && preSCID != "" && Num > 1) {
+              var left = content.substring(
+                0,
+                content.lastIndexOf("rowspan='1'") - 1
+              );
+              var right = content.substring(
+                content.lastIndexOf("rowspan='1'") + 11
+              );
+              content = left + "rowspan='" + Num + "'" + right;
+              Num = 0;
+            }
+            content += "<tr>";
+            content += '<td bgcolor="#8AC2E2">&nbsp;</td>';
+            content += '<td bgcolor="#bce4ff">&nbsp;</td>';
+            content += '<td bgcolor="#bce4ff">&nbsp;</td>';
+            content += "<td bgcolor=\"#8AC2E2\" rowspan='1'>&nbsp;</td>";
+            content += "</tr>";
+          }
+        }
+
+        //alert("rows:" + b.rows.length + ",nCount:" + nCount + ",nTotal:" + nTotal + ",i:" + i + ",Num:" + Num);
+        if (b.rows.length >= nCount) {
+          //if (i >= nTotal && preSCID != "" && Num > 1) {
+          if (preSCID != "" && Num > 1) {
+            var left = content.substring(
+              0,
+              content.lastIndexOf("rowspan='1'") - 1
+            );
+            var right = content.substring(
+              content.lastIndexOf("rowspan='1'") + 11
+            );
+            content = left + "rowspan='" + Num + "'" + right;
+            Num = 0;
+          }
+        }
+        content += "</table>";
+        //alert(content);
+        $("#handleDiv").html(content);
+        preSCID = "";
+      }
+      //翻页
+      function ReloadList() {
+        if (pagecount <= 1) return; //如果总页数为1页，或未赋值，不处理。
+        //alert(pagenum + "," + pagecount);
+        if (pagenum >= pagecount - 1) pagenum = 0;
+        else pagenum++; //当页码超过总页数时，从0（第一页）开始。
+        CreateTablehtml();
+      }
+      //2015-12-04 WQ 处理名字，隐藏部分文字。patientname名字，hid是否隐藏，
+      function HiddenName(patientname, hid) {
+        if (!hid) return patientname;
+        else {
+          if (patientname.length > 1) {
+            var newname = "",
+              num = "";
+            if (patientname.indexOf(".") > 0) {
+              //处理有序号的部分
+              num = patientname.substr(0, patientname.indexOf(".") + 1);
+              patientname = patientname.substr(patientname.indexOf(".") + 1);
+            }
+            newname = patientname.substr(0, 1) + "*"; //取第一字+"*";
+            if (patientname.length > 2) {
+              //如果名字长度大于2，将后面的字拼写好。
+              newname += patientname.substr(2);
+            }
+
+            patientname = num + newname;
+          }
+          return patientname;
+        }
+      }
+
+      function Request() {
+        $.get("IndexHandle.ashx?action=reload", function (data) {
+          //var date = data.split(' ')[0];//日期
+          //var time = data.split(' ')[1];//时间
+          //var year=date.split('-')[0];
+          //var month=date.split('-')[1] - 1;
+          //var day=date.split('-')[2];
+          //var hh=time.split(':')[0];
+          //var mm=time.split(':')[1];
+          //var ss = time.split(':')[2];
+
+          //var _QueueUpdateTime = new Date(year, month, day, hh, mm, ss);
+          var _QueueUpdateTime = StringToDate(data);
+
+          if (_QueueUpdateTime.getTime() != QueueUpdateTime.getTime()) {
+            //alert(_QueueUpdateTime.getTime() + "," + QueueUpdateTime.getTime());
+            LoadData();
+            QueueUpdateTime = _QueueUpdateTime;
+          }
+        });
+      }
+      var StationID = "";
+      $(function () {
+        // var doctorInfo = new DoctorInfo(doctorInfos);
+        // doctorInfo.showDoctorInfo();
+        var Result = new Object();
+        Result = GetRequest();
+        StationID = Result["StationID"]; //分诊台ID
+
+        $("#riqi").html(yy + "年" + MM + "月" + dd + "日");
+        Request();
+        setInterval("Request()", 500);
+
+        if (turntime > 0) setInterval("ReloadList()", turntime * 1000);
+      });
+      function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+          var str = url.substr(1);
+          strs = str.split("&");
+          for (var i = 0; i < strs.length; i++) {
+            theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+          }
+        }
+        return theRequest;
+      }
+
+      StringToDate = function (DateStr) {
+        if (typeof DateStr == "undefined") return new Date();
+        if (typeof DateStr == "date") return DateStr;
+        var converted = Date.parse(DateStr);
+        var myDate = new Date(converted);
+        if (isNaN(myDate)) {
+          DateStr = DateStr.replace(/:/g, "-");
+          DateStr = DateStr.replace(" ", "-");
+          DateStr = DateStr.replace(".", "-");
+          var arys = DateStr.split("-");
+          switch (arys.length) {
+            case 7:
+              myDate = new Date(
+                arys[0],
+                --arys[1],
+                arys[2],
+                arys[3],
+                arys[4],
+                arys[5],
+                arys[6]
+              );
+              break;
+            case 6:
+              myDate = new Date(
+                arys[0],
+                --arys[1],
+                arys[2],
+                arys[3],
+                arys[4],
+                arys[5]
+              );
+              break;
+            default:
+              myDate = new Date(arys[0], --arys[1], arys[2]);
+              break;
+          }
+        }
+        return myDate;
+      };
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div
+        id="doctorInfo"
+        style="
+          position: absolute;
+          height: 1048px;
+          width: 290px;
+          overflow-y: auto;
+          overflow-x: hidden;
+        "
+      ></div>
+      <div
+        style="position: absolute; width: 1630px; height: 960px; left: 290px"
+      >
+        <div
+          style="
+            position: relative;
+            top: 10px;
+            left: 15px;
+            background: url(images/jiuzhen.png) no-repeat;
+            height: 88px;
+          "
+        >
+          <div
+            style="
+              position: relative;
+              left: 80px;
+              color: #000;
+              font-size: 36px;
+              line-height: 78px;
+            "
+          >
+            <table width="1531px">
+              <tr>
+                <td>
+                  <label
+                    id="StationName"
+                    style="font-weight: bold; font-size: 40px"
+                  >
+                    内科</label
+                  >
+                </td>
+                <td align="right">
+                  <span style="font-size: 12pt"
+                    >队列<label id="labList"></label>个 共<label
+                      id="labTotalPage"
+                    ></label
+                    >页 当前第<label id="labCurrPage"></label>页 从<label
+                      id="labstartred"
+                    ></label
+                    >开始</span
+                  >
+                  <span id="riqi">2012年12月12日</span>
+                  <span id="week">星期一&nbsp;上午&nbsp;</span>
+                  <span id="time">12：00</span>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div
+          style="
+            position: relative;
+            top: 10px;
+            width: 1620px;
+            height: 100%;
+            text-align: center;
+            left: 1px;
+          "
+          id="handleDiv"
+        >
+          <table
+            width="100%"
+            height="100%"
+            style="
+              text-align: center;
+              background-color: #fff;
+              border-spacing: 3px;
+              font-size: 36px;
+              border: 3px solid #4a84ff;
+              color: #000;
+            "
+            cellspacing="0"
+            cellpadding="0"
+          >
+            <tr bgcolor="#FFFFFF" style="color: #fff">
+              <td
+                style="
+                  background: url(images/daizhentitlebg.gif) repeat-x;
+                  height: 64px;
+                  width: 15%;
+                "
+                align="center"
+              >
+                队列
+              </td>
+              <td
+                style="
+                  background: url(images/daizhentitlebg.gif) repeat-x;
+                  height: 64px;
+                  width: 15%;
+                "
+                align="center"
+              >
+                诊室
+              </td>
+              <td
+                style="
+                  background: url(images/daizhentitlebg.gif) repeat-x;
+                  height: 64px;
+                  width: 10%;
+                "
+                align="center"
+              >
+                当前号
+              </td>
+              <td
+                style="
+                  background: url(images/daizhentitlebg.gif) repeat-x;
+                  height: 64px;
+                  width: 40%;
+                "
+                align="center"
+              >
+                待诊队列
+              </td>
+            </tr>
+            <tr>
+              <td bgcolor="#8AC2E2">&nbsp;</td>
+              <td bgcolor="#bce4ff">&nbsp;</td>
+              <td bgcolor="#bce4ff">&nbsp;</td>
+              <td bgcolor="#8AC2E2">&nbsp;</td>
+            </tr>
+            <tr>
+              <td bgcolor="#8AC2E2">&nbsp;</td>
+              <td bgcolor="#bce4ff">&nbsp;</td>
+              <td bgcolor="#bce4ff">&nbsp;</td>
+              <td bgcolor="#8AC2E2">&nbsp;</td>
+            </tr>
+            <tr>
+              <td bgcolor="#8AC2E2">&nbsp;</td>
+              <td bgcolor="#bce4ff">&nbsp;</td>
+              <td bgcolor="#bce4ff">&nbsp;</td>
+              <td bgcolor="#8AC2E2">&nbsp;</td>
+            </tr>
+            <tr>
+              <td bgcolor="#8AC2E2">&nbsp;</td>
+              <td bgcolor="#bce4ff">&nbsp;</td>
+              <td bgcolor="#bce4ff">&nbsp;</td>
+              <td bgcolor="#8AC2E2">&nbsp;</td>
+            </tr>
+            <tr>
+              <td bgcolor="#8AC2E2">&nbsp;</td>
+              <td bgcolor="#bce4ff">&nbsp;</td>
+              <td bgcolor="#bce4ff">&nbsp;</td>
+              <td bgcolor="#8AC2E2">&nbsp;</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!--<div class="hearder"   >
+  <div class="hearder-title"><span id="StationName"></span></div>
+  <div class="header-right"><div class="riqi">2012年12月12日</div><div class="shijian">
+   <span id="week">星期一&nbsp;上午&nbsp;</span>
+            <span id="time">12：00</span></div></div>
+</div>
+    <div class="containt">
+
+</div>-->
+
+    <div class="footer" style="display: none">
+      <marquee direction="left">下一位就诊人：李四</marquee>
+    </div>
+  </body>
+</html>
