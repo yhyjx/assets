@@ -8,7 +8,6 @@ git commit -m '代码更新'
 git push
 
 cp -rf resource dist
-cd -
 cd dist
 
 git init
