@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 function returnJson() {
-  const files = fs.readdirSync(path.resolve(__dirname, "../src/resource"));
+  const files = fs.readdirSync(path.resolve(__dirname, "../resource"));
   const jsonArr = JSON.stringify(
     {
       data: files.map((file) => {

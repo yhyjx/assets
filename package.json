@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "webpack server --config ./configs/webpack.config.js --env development",
     "build": "webpack --config ./configs/webpack.config.js --env production",
+    "auto": "./deploy.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
