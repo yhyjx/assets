@@ -7,7 +7,7 @@ git add -A
 git commit -m '代码更新'
 git push
 
-cp resource dist
+cp -rf resource dist
 cd -
 cd dist
 
