@@ -4,7 +4,7 @@ import "./style/index.css";
 
 const app = document.querySelector("#app");
 const dataSource = data.data;
-const fileForwards = "https://yhyjx.github.io/assets/resource";
+const fileForwards = "https://yhyjx.github.io/my-assets/resource";
 app.innerHTML = `
   <canvas id="waterfall"></canvas>
   <div class="container">
