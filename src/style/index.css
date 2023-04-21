@@ -31,7 +31,8 @@
 }
 
 .content a {
-  color: #fff;
+  color: #447006;
+  font-size: 20px;
   display: block;
   text-decoration: none;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
