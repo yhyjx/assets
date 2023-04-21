@@ -15,5 +15,29 @@
   color: #fff;
   padding: 15px;
   border-radius: 5px;
+  overflow: auto;
 }
 
+.container h1 {
+  position: fixed;
+  top: 0;
+}
+
+.content{
+  margin-top: 55px;
+  overflow: auto;
+}
+
+.content a {
+  color: #fff;
+  display: block;
+  text-decoration: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.content a:not(:first-child){
+  margin-top: 10px;
+}

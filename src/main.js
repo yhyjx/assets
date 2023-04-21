@@ -7,12 +7,15 @@ const dataSource = data.data;
 const fileForwards = "https://yhyjx.github.io/assets/resource";
 app.innerHTML = `
   <div class="container">
+    <h1>资源列表</h1>
+    <div class="content">
     ${dataSource
       .map(
         (item) =>
-          `<a href="${fileForwards}/${item.filePath}" >${item.fileName}</a>`
+          `<a href="${fileForwards}/${item.filePath}" download="${item.fileName}">${item.fileName}</a>`
       )
       .join("")}
+    </div>
   </div>
 `;
 
