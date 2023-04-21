@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yhyjx/assets.git"
+    "url": "git+https://github.com/yhyjx/my-assets.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "yuhao",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/yhyjx/assets/issues"
+    "url": "https://github.com/yhyjx/my-assets/issues"
   },
-  "homepage": "https://github.com/yhyjx/assets#readme",
+  "homepage": "https://github.com/yhyjx/my-assets#readme",
   "devDependencies": {
     "@types/node": "^18.15.12",
     "css-loader": "^6.7.3",

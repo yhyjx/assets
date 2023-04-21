@@ -13,7 +13,7 @@ cd dist
 git init
 git add -A
 git commit -m '自动部署'
-git push -f git@github.com:yhyjx/assets.git master:pages
+git push -f git@github.com:yhyjx/my-assets.git master:pages
 
 cd -
 
